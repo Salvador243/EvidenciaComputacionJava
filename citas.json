@@ -1,0 +1,114 @@
+[
+    {
+        "id": 1,
+        "nombreCita": "Cita numero 1",
+        "fecha": "24/11/2021",
+        "medico": {
+            "id": 1,
+            "nombre": "Carlos",
+            "especialida": "General"
+        },
+        "paciente": {
+            "id": 1,
+            "nombre": "Maria"
+        }
+    },
+    {
+        "id": 1,
+        "nombreCita": "Cita numero 2",
+        "fecha": "24/11/2021",
+        "medico": {
+            "id": 1,
+            "nombre": "Roberto",
+            "especialida": "General"
+        },
+        "paciente": {
+            "id": 1,
+            "nombre": "Arturo"
+        }
+    },
+    {
+        "id": 1,
+        "nombreCita": "Cita numero 1",
+        "fecha": "24/11/2021",
+        "medico": {
+            "id": 1,
+            "nombre": "Salvador",
+            "especialida": "General"
+        },
+        "paciente": {
+            "id": 1,
+            "nombre": "Maria"
+        }
+    },
+    {
+        "id": 1,
+        "nombreCita": "Cita numero 1",
+        "fecha": "24/11/2021",
+        "medico": {
+            "id": 1,
+            "nombre": "Salvador",
+            "especialida": "General"
+        },
+        "paciente": {
+            "id": 1,
+            "nombre": "Maria"
+        }
+    },
+    {
+        "id": 1,
+        "nombreCita": "Cita numero 1",
+        "fecha": "24/11/2021",
+        "medico": {
+            "id": 1,
+            "nombre": "Salvador",
+            "especialida": "General"
+        },
+        "paciente": {
+            "id": 1,
+            "nombre": "Maria"
+        }
+    },
+    {
+        "id": 1,
+        "nombreCita": "Cita numero 1",
+        "fecha": "24/11/2021",
+        "medico": {
+            "id": 1,
+            "nombre": "Salvador",
+            "especialida": "General"
+        },
+        "paciente": {
+            "id": 1,
+            "nombre": "Maria"
+        }
+    },
+    {
+        "id": 565,
+        "nombreCita": "2222",
+        "fecha": "852",
+        "medico": {
+            "id": 5,
+            "nombre": "Nuevo doc",
+            "especialida": "nueva especialidad"
+        },
+        "paciente": {
+            "id": 98,
+            "nombre": "asdasdadasd"
+        }
+    },
+    {
+        "id": 774,
+        "nombreCita": "dolor de cabeza",
+        "fecha": "2022-05-05",
+        "medico": {
+            "id": 23,
+            "nombre": "otro",
+            "especialida": "otra"
+        },
+        "paciente": {
+            "id": 555,
+            "nombre": "asdasdhubjnas "
+        }
+    }
+]

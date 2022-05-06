@@ -46,27 +46,8 @@ public class ConsultorioMain {
         } else {
             System.out.println("el usuario no existe");
         }
-
     }
-
-    public static void cargarUsuarios() {
-
-        if (usuarios == null) {
-            usuarios = new ArrayList<>();
-        }
-
-        usuarios.add(new Usuario(1, "carlos", "1234"));
-        usuarios.add(new Usuario(2, "sofia", "1234"));
-        usuarios.add(new Usuario(2, "ithan", "0000"));
-        usuarios.add(new Usuario(2, "alfredo", "0000"));
-        System.out.println("Los usuarios han sido cargados: " + usuarios.size());
-
-    }
-
-    public static boolean validarCredenciales(String usuario, String contrasena) {
-        return usuarios.stream().anyMatch(x -> x.getNombre().equals(usuario) && x.getContrasena().equals(contrasena));
-    }
-
+        
     public static void menu() {
         Integer opcion = -1;
         while (opcion != 0) {
@@ -109,26 +90,26 @@ public class ConsultorioMain {
         }
 
     }
-    public static void crearPaciente(){
-        try {
-            Scanner leer = new Scanner(System.in);
-            System.out.println("Escriba el id del Paciente");
-            int id = Integer.parseInt(leer.nextLine());
-            System.out.println("Escriba el nombre del Paciente");
-            String nombre = leer.nextLine();
-
-            Paciente pac = new Paciente();
-            pac.setId(id);
-            pac.setNombre(nombre);
-            
-            pacientes.add(pac);
-
-        } catch (NumberFormatException e) {
-
-            e.printStackTrace();
-        }
+    
+    public static boolean validarCredenciales(String usuario, String contrasena) {
+        return usuarios.stream().anyMatch(x -> x.getNombre().equals(usuario) && x.getContrasena().equals(contrasena));
     }
 
+    public static void cargarUsuarios() {
+
+        if (usuarios == null) {
+            usuarios = new ArrayList<>();
+        }
+
+        usuarios.add(new Usuario(1, "carlos", "1234"));
+        usuarios.add(new Usuario(2, "sofia", "1234"));
+        usuarios.add(new Usuario(2, "ithan", "0000"));
+        usuarios.add(new Usuario(2, "alfredo", "0000"));
+        System.out.println("Los usuarios han sido cargados: " + usuarios.size());
+
+    }
+    
+    // incio Medicos
     public static void verMedicos() {
         for (Medicos cita : medicos) {
             System.out.println("---------------------------------------------------");
@@ -185,11 +166,47 @@ public class ConsultorioMain {
         /* Guardar variable */
     }
 
+    public static String leerMedico() throws IOException {
+        String archivo = "src/archivos/medicos.json";
+        FileReader f = new FileReader(archivo);
+        BufferedReader b = new BufferedReader(f);
+        StringBuilder json = new StringBuilder();
+        String cadena;
+        while ((cadena = b.readLine()) != null) {
+            json.append(cadena);
+        }
+        b.close();
+
+        return json.toString();
+    }
+    //fin medicos
+
+    //inicio pacientes
     public static void verPacientes() {
         for (Paciente paciente : pacientes) {
             System.out.println("---------------------------------------------------");
             System.out.println("Id paciente:" + paciente.getId());
             System.out.println("Nombre paciente:" + paciente.getNombre());
+        }
+    }
+
+    public static void crearPaciente(){
+        try {
+            Scanner leer = new Scanner(System.in);
+            System.out.println("Escriba el id del Paciente");
+            int id = Integer.parseInt(leer.nextLine());
+            System.out.println("Escriba el nombre del Paciente");
+            String nombre = leer.nextLine();
+
+            Paciente pac = new Paciente();
+            pac.setId(id);
+            pac.setNombre(nombre);
+            
+            pacientes.add(pac);
+
+        } catch (NumberFormatException e) {
+
+            e.printStackTrace();
         }
     }
 
@@ -215,6 +232,36 @@ public class ConsultorioMain {
         /* Guardar variable */
     }
 
+    public static String leerPaciente() throws IOException {
+        String archivo = "src/archivos/pacientes.json";
+        FileReader f = new FileReader(archivo);
+        BufferedReader b = new BufferedReader(f);
+        StringBuilder json = new StringBuilder();
+        String cadena;
+        while ((cadena = b.readLine()) != null) {
+            json.append(cadena);
+        }
+        b.close();
+
+        return json.toString();
+    }
+    
+    public static void cargarPacientes() throws IOException {
+        String json = leerPaciente();
+        String jsonMedicos = leerMedico();
+        Gson gson = new Gson();
+        Paciente[] pc = gson.fromJson(json, Paciente[].class);
+        for (Paciente temp : pc) {
+            pacientes.add(temp);
+        }
+        Medicos[] medico = gson.fromJson(jsonMedicos, Medicos[].class);
+        for (Medicos temp : medico) {
+            medicos.add(temp);
+        }
+    }
+    //fin pacientes
+    
+    //inicio citas
     public static void save() {
         try {
             ObjectMapper mapper = new ObjectMapper();
@@ -236,43 +283,6 @@ public class ConsultorioMain {
         }
 
         /* Guardar variable */
-    }
-
-    public static void cargarCita() throws IOException {
-        String json = leerArchivo();
-        String jsonMedicos = leerMedico();
-        Gson gson = new Gson();
-        Cita[] cita = gson.fromJson(json, Cita[].class);
-        for (Cita temp : cita) {
-            citas.add(temp);
-        }
-        Medicos[] medico = gson.fromJson(jsonMedicos, Medicos[].class);
-        for (Medicos temp : medico) {
-            medicos.add(temp);
-        }
-    }
-
-    public static void cargarPacientes() throws IOException {
-        String json = leerPaciente();
-        String jsonMedicos = leerMedico();
-        Gson gson = new Gson();
-        Paciente[] pc = gson.fromJson(json, Paciente[].class);
-        for (Paciente temp : pc) {
-            pacientes.add(temp);
-        }
-        Medicos[] medico = gson.fromJson(jsonMedicos, Medicos[].class);
-        for (Medicos temp : medico) {
-            medicos.add(temp);
-        }
-    }
-
-    public static void imprimirTodasCitas() {
-        for (Cita cita : citas) {
-            System.out.println("---------------------------------------------------");
-            System.out.println("Nombre cita:" + cita.getNombreCita());
-            System.out.println("Nombre paciente:" + cita.getPaciente().getNombre());
-            System.out.println("Nombre medico:" + cita.getMedico().getNombre());
-        }
     }
 
     public static void crearCita() {
@@ -326,6 +336,29 @@ public class ConsultorioMain {
         citas.add(cita);
     }
 
+    public static void cargarCita() throws IOException {
+        String json = leerArchivo();
+        String jsonMedicos = leerMedico();
+        Gson gson = new Gson();
+        Cita[] cita = gson.fromJson(json, Cita[].class);
+        for (Cita temp : cita) {
+            citas.add(temp);
+        }
+        Medicos[] medico = gson.fromJson(jsonMedicos, Medicos[].class);
+        for (Medicos temp : medico) {
+            medicos.add(temp);
+        }
+    }
+
+    public static void imprimirTodasCitas() {
+        for (Cita cita : citas) {
+            System.out.println("---------------------------------------------------");
+            System.out.println("Nombre cita:" + cita.getNombreCita());
+            System.out.println("Nombre paciente:" + cita.getPaciente().getNombre());
+            System.out.println("Nombre medico:" + cita.getMedico().getNombre());
+        }
+    }
+
     public static String leerArchivo() throws IOException {
         String archivo = "citas.json";
         FileReader f = new FileReader(archivo);
@@ -338,33 +371,5 @@ public class ConsultorioMain {
         b.close();
         return json.toString();
     }
-
-    public static String leerMedico() throws IOException {
-        String archivo = "src/archivos/medicos.json";
-        FileReader f = new FileReader(archivo);
-        BufferedReader b = new BufferedReader(f);
-        StringBuilder json = new StringBuilder();
-        String cadena;
-        while ((cadena = b.readLine()) != null) {
-            json.append(cadena);
-        }
-        b.close();
-
-        return json.toString();
-    }
-
-    public static String leerPaciente() throws IOException {
-        String archivo = "src/archivos/pacientes.json";
-        FileReader f = new FileReader(archivo);
-        BufferedReader b = new BufferedReader(f);
-        StringBuilder json = new StringBuilder();
-        String cadena;
-        while ((cadena = b.readLine()) != null) {
-            json.append(cadena);
-        }
-        b.close();
-
-        return json.toString();
-    }
-
+    //fin citas
 }

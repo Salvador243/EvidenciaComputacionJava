@@ -110,5 +110,19 @@
             "id": 555,
             "nombre": "asdasdhubjnas "
         }
+    },
+    {
+        "id": 951,
+        "nombreCita": "Enfermedades diversas",
+        "fecha": "20/05/2022",
+        "medico": {
+            "id": 546,
+            "nombre": "Medico Temporal",
+            "especialida": "Pediatria"
+        },
+        "paciente": {
+            "id": 741,
+            "nombre": "Adriana"
+        }
     }
 ]

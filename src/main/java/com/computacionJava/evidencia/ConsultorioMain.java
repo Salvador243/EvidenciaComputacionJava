@@ -56,7 +56,6 @@ public class ConsultorioMain {
             System.out.println("1.-Dar de alta a medico\n"
                     + "2.-Dar de alta a un paciente\n"
                     + "4.Ver medicos y pacientes en la lista\n"
-                    + "5.-Ver las citas por nombre del medico\n"
                     + "7.-Crear cita\n"
                     + "8.-ver todas las citas\n"
                     + "9.-Guardar\n"
